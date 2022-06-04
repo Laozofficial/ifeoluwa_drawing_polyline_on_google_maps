@@ -1,0 +1,74 @@
+<html>
+
+<head>
+    <title>Simple Polylines</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <!-- playground-hide -->
+    <script>
+        const process = {
+            env: {}
+        };
+        process.env.GOOGLE_MAPS_API_KEY =
+            "enter_key_here";
+    </script>
+    <!-- playground-hide-end -->
+
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <!-- 
+     The `defer` attribute causes the callback to execute after the full HTML
+     document has been parsed. For non-blocking uses, avoiding race conditions,
+     and consistent behavior across browsers, consider loading using Promises
+     with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+    -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=enter_key_here&callback=initMap&v=weekly"
+        defer></script>
+    <script>
+
+        function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom:15,
+            center: {
+                lat: 6.465422,
+                lng: 3.406448
+            },
+            // mapTypeId: "satellite",
+        });
+        const flightPlanCoordinates = [{
+                lat: 6.465422,
+                lng: 3.406448
+            },
+            {
+                lat: 7.348720,
+                lng: 3.879290
+            },
+            // {
+            //     lat: -18.142,
+            //     lng: 178.431
+            // },
+            // {
+            //     lat: -27.467,
+            //     lng: 153.027
+            // },
+        ];
+        const flightPath = new google.maps.Polyline({
+            path: flightPlanCoordinates,
+            geodesic: true,
+            strokeColor: "#FF0000",
+            strokeOpacity: 1.0,
+            strokeWeight: 2,
+        });
+
+    flightPath.setMap(map);
+}
+
+    </script>
+        
+</body>
+
+</html>
